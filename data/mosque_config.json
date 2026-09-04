@@ -1,0 +1,55 @@
+{
+  "mosque": {
+    "name": "ADHAN Schedule",
+    "country": "India",
+    "latitude": 14.4777,
+    "longitude": 74.2206,
+    "phone": "+91 8970224897",
+    "email": ""
+  },
+  "calculation": {
+    "method": "MWL",
+    "school": "Shafi",
+    "hijriOffset": 1
+  },
+  "jamaat": {
+    "fajr": {
+      "type": "offset",
+      "value": 25
+    },
+    "dhuhr": {
+      "type": "offset",
+      "value": 15
+    },
+    "asr": {
+      "type": "offset",
+      "value": 20
+    },
+    "maghrib": {
+      "type": "offset",
+      "value": 10
+    },
+    "isha": {
+      "type": "offset",
+      "value": 20
+    },
+    "jumuah": {
+      "type": "fixed",
+      "value": "13:30"
+    }
+  },
+  "audio": {
+    "reciter": "makkah",
+    "volume": 0.8,
+    "playAdhan": true,
+    "playBeepBeforeJamaat": true,
+    "beepLeadMinutes": 5
+  },
+  "tvMode": {
+    "theme": "classic_green",
+    "scrollingSpeed": 25,
+    "screenSaverMinutes": 10,
+    "showPhoneWarning": true,
+    "showQrCode": false
+  }
+}

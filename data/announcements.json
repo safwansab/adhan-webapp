@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Community Iftar Dinner",
+    "content": "in a month of ramdan  our masjid provide iftar to all",
+    "priority": "info",
+    "active": true,
+    "id": "ann-1788414551",
+    "date": ""
+  },
+  {
+    "id": "ann-3",
+    "title": "Please Keep Phones Silent",
+    "content": "Kindly turn off mobile phones or set them to silent mode upon entering the main prayer hall. JazakAllah Khair.",
+    "priority": "important",
+    "date": "",
+    "active": true
+  }
+]
