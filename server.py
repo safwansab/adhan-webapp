@@ -293,12 +293,37 @@ class AdhanAppRequestHandler(http.server.SimpleHTTPRequestHandler):
     elif path == "/api/mosque/overrides":
       self.send_json(read_json_file("overrides.json", []))
     else:
-      # Serve static files
+      # Serve static files directly relative to server.py
+      base_dir = os.path.dirname(os.path.abspath(__file__))
       rel_path = path.lstrip("/")
       if not rel_path or rel_path == "index.html":
-        self.path = "/index.html"
+        rel_path = "index.html"
       elif rel_path.startswith("webapp/"):
-        self.path = "/" + rel_path[7:]
+        rel_path = rel_path[7:]
+
+      target_file = os.path.join(base_dir, rel_path)
+      if not os.path.isfile(target_file):
+        target_file = os.path.join(base_dir, "webapp", rel_path)
+
+      if os.path.isfile(target_file):
+        self.send_response(200)
+        if target_file.endswith(".css"):
+          self.send_header("Content-Type", "text/css; charset=utf-8")
+        elif target_file.endswith(".js"):
+          self.send_header("Content-Type", "application/javascript; charset=utf-8")
+        elif target_file.endswith(".html"):
+          self.send_header("Content-Type", "text/html; charset=utf-8")
+        elif target_file.endswith(".json"):
+          self.send_header("Content-Type", "application/json; charset=utf-8")
+        elif target_file.endswith(".svg"):
+          self.send_header("Content-Type", "image/svg+xml")
+        else:
+          self.send_header("Content-Type", "application/octet-stream")
+        self.end_headers()
+        with open(target_file, "rb") as f:
+          self.wfile.write(f.read())
+        return
+
       super().do_GET()
 
   def end_headers(self):
