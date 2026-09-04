@@ -294,9 +294,18 @@ class AdhanAppRequestHandler(http.server.SimpleHTTPRequestHandler):
       self.send_json(read_json_file("overrides.json", []))
     else:
       # Serve static files
-      if path in ["/", ""]:
+      rel_path = path.lstrip("/")
+      if not rel_path or rel_path == "index.html":
         self.path = "/index.html"
+      elif rel_path.startswith("webapp/"):
+        self.path = "/" + rel_path[7:]
       super().do_GET()
+
+  def end_headers(self):
+    self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+    self.send_header("Pragma", "no-cache")
+    self.send_header("Expires", "0")
+    super().end_headers()
 
   def do_POST(self):
     parsed = urllib.parse.urlparse(self.path)
